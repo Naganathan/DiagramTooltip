@@ -1698,6 +1698,11 @@
             Notify the component about the required scripts are rendered in the web page.
             </summary>
         </member>
+        <member name="M:Syncfusion.Blazor.SfBaseComponent.InvokeScriptRendered">
+            <summary>
+            Invoke method for ScriptDependencies class to notify script rendered in web page.
+            </summary>
+        </member>
         <member name="M:Syncfusion.Blazor.SfBaseComponent.InvokeMethod(System.String,System.Object[])">
             <summary>
             Invokes JSInterop for void return type methods.
@@ -1753,24 +1758,10 @@
             <param name="isCollectionChanged">Sets true if the observable collection changed.</param>
             <param name="e">Changed Event Args</param>
         </member>
-        <member name="T:Syncfusion.Blazor.SfComponentActivator">
+        <member name="T:Syncfusion.Blazor.ScriptDependencies">
             <summary>
-            A implementation of <see cref="T:Microsoft.AspNetCore.Components.IComponentActivator"/> for Syncfusion Blazor components used to initialize custom components
-            that can be registered through dependency injection.
+            ScriptDependencies class to load the dependent scripts in load time.
             </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.SfComponentActivator.#ctor(System.IServiceProvider)">
-            <summary>
-            Default constructor for SfComponentActivator class.
-            </summary>
-            <param name="provider">Service provider for registered components.</param>
-        </member>
-        <member name="M:Syncfusion.Blazor.SfComponentActivator.CreateInstance(System.Type)">
-            <summary>
-            Create component for the specified component type.
-            </summary>
-            <param name="componentType">Type of component need to be created.</param>
-            <returns>Returns newly created component.</returns>
         </member>
         <member name="T:Syncfusion.Blazor.SyncfusionBlazor">
             <summary>

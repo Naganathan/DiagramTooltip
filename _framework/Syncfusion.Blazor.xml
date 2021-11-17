@@ -75,11 +75,6 @@
             Gets or sets hash data.
             </summary>
         </member>
-        <member name="P:Syncfusion.Blazor.Internal.BlazorIdJsonConverter.CanRead">
-            <summary>
-            Gets a value indicating whether this Newtonsoft.Json.JsonConverter can read JSON.
-            </summary>
-        </member>
         <member name="M:Syncfusion.Blazor.Internal.BlazorIdJsonConverter.CanConvert(System.Type)">
             <summary>
             Determines whether this instance can convert the specified object type.
@@ -87,23 +82,21 @@
             <param name="objectType">Type of the object.</param>
             <returns>true if this instance can convert the specified object type; otherwise, false.</returns>
         </member>
-        <member name="M:Syncfusion.Blazor.Internal.BlazorIdJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Syncfusion.Blazor.Internal.BlazorIdJsonConverter.Write(System.Text.Json.Utf8JsonWriter,Syncfusion.Blazor.Internal.BlazorIdJsonConverter,System.Text.Json.JsonSerializerOptions)">
             <summary>
             Writes the JSON representation of the object.
             </summary>
-            <param name="writer">The Newtonsoft.Json.JsonWriter to write to.</param>
+            <param name="writer">The System.Text.Json.Utf8JsonWriter to write value.</param>
             <param name="value">The value.</param>
-            <param name="serializer">The calling serializer.</param>
+            <param name="options">The calling System.Text.Json Serializer Option.</param>
         </member>
-        <member name="M:Syncfusion.Blazor.Internal.BlazorIdJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+        <member name="M:Syncfusion.Blazor.Internal.BlazorIdJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
             <summary>
             Reads the JSON representation of the object.
             </summary>
-            <param name="reader">The Newtonsoft.Json.JsonReader to read from.</param>
-            <param name="objectType">Type of the object.</param>
-            <param name="existingValue">The existing value of object being read.</param>
-            <param name="serializer">The calling serializer.</param>
-            <returns>The object value.</returns>
+            <param name="reader">The System.Text.Json.Utf8JsonReader to read value.</param>
+            <param name="typeToConvert">Type of the object.</param>
+            <param name="options">The calling System.Text.Json Serializer Option.</param>
         </member>
         <member name="T:Syncfusion.Blazor.Internal.NonFlagStringEnumConverter">
             <summary>
@@ -117,6 +110,16 @@
             </summary>
             <param name="objectType">Type of the object.</param>
             <returns>true if this instance can convert the specified object type; otherwise, false.</returns>
+        </member>
+        <member name="T:Syncfusion.Blazor.Internal.DateTimeZoneHandlingConverter">
+            <summary>
+            Used to Parse string Date Time values into a DateTime Format
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Blazor.Internal.DateTimeOffsetCustomConverter">
+            <summary>
+            Used to Parse string Date Time values into a DateTime Offset Format
+            </summary>
         </member>
         <member name="T:Syncfusion.Blazor.Internal.PackageNameAttribute">
             <summary>
@@ -1659,9 +1662,277 @@
             <param name="key">Key string to get the localized value.</param>
             <returns>Returns the localized string.</returns>
         </member>
+        <member name="T:Syncfusion.Blazor.FastReflectionExtension">
+            <exclude/>
+        </member>
+        <member name="M:Syncfusion.Blazor.FastReflectionExtension.CreateAccessor(System.Reflection.PropertyInfo)">
+            <summary>
+            Creates and returns <see cref="T:Syncfusion.Blazor.IPropertyAccessor"/> that stores the property accessor of a specfied property.
+            </summary>
+            <param name="propertyInfo">The info that provides access to property metadata.</param>
+            <returns><see cref="T:Syncfusion.Blazor.IPropertyAccessor"/></returns>
+        </member>
+        <member name="M:Syncfusion.Blazor.FastReflectionExtension.CreateAccessor(System.Type,System.String)">
+            <summary>
+            Creates and returns <see cref="T:Syncfusion.Blazor.IPropertyAccessor"/> that stores the property accessor of a specfied property.
+            </summary>
+            <param name="objectType">Type of object.</param>
+            <param name="propertyName">The string containing the name of the public property.</param>
+            <returns><see cref="T:Syncfusion.Blazor.IPropertyAccessor"/></returns>
+        </member>
+        <member name="M:Syncfusion.Blazor.FastReflectionExtension.GetValue(System.Object,System.String,System.Boolean)">
+            <summary>
+            Returns the property value of a specified object of any type includes static types, <see cref="T:System.Dynamic.DynamicObject"/> and <see cref="T:System.Dynamic.ExpandoObject"/> types.
+            </summary>
+            <param name="obj">The object whose property value will be returned.</param>
+            <param name="propertyName">The string containing the name of the public property.</param>
+            <param name="reflectComplexProperty">true, if need to reflect complex property. </param>
+            <returns>The property value of the specified object.</returns>
+            <remarks>For accessing complex/nested property value, given the propertyName with field names delimited by dot(.).</remarks>
+        </member>
+        <member name="T:Syncfusion.Blazor.ReflectionHelper">
+            <summary>
+            A class performs property access and cache the getter method for better performance.
+            </summary>
+            <exclude/>
+        </member>
+        <member name="M:Syncfusion.Blazor.ReflectionHelper.GetValue(System.Object,System.String)">
+            <summary>
+            Returns the property value of a specified object of any type includes static types, <see cref="T:System.Dynamic.DynamicObject"/> and <see cref="T:System.Dynamic.ExpandoObject"/> types.
+            </summary>
+            <param name="obj">The object whose property value will be returned.</param>
+            <param name="propertyName">The string containing the name of the public property.</param>
+            <returns>The property value of the specified object.</returns>
+            <remarks>For accessing complex/nested property value, given the propertyName with field names delimited by dot(.).</remarks>
+        </member>
+        <member name="M:Syncfusion.Blazor.ReflectionHelper.TryGetValue(System.Object,System.String,System.Boolean,System.Object@)">
+            <summary>
+            Returns true, the property value of a specified object of any type includes static types, 
+            <see cref="T:System.Dynamic.DynamicObject"/> and <see cref="T:System.Dynamic.ExpandoObject"/> type is set to value parameter.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Blazor.ReflectionHelper.Dispose">
+            <summary>
+            Releases cached property accessor.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Blazor.IPropertyAccessor">
+            <summary>
+            Interface stores the property accessor for static types.
+            </summary>
+            <exclude/>
+        </member>
+        <member name="P:Syncfusion.Blazor.IPropertyAccessor.PropertyInfo">
+            <summary>
+            Gets or sets the info that provides access to property metadata.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Blazor.IPropertyAccessor.GetValue(System.Object)">
+            <summary>
+            Returns the property value of a specified object.
+            </summary>
+            <param name="obj">The object whose property value will be returned.</param>
+            <returns>The property value of the specified object.</returns>
+        </member>
+        <member name="M:Syncfusion.Blazor.IPropertyAccessor.GetKeyValue(System.Object)">
+            <summary>
+            Returns the property value of a specified object as string.
+            </summary>
+            <param name="obj">The object whose property value will be returned.</param>
+            <returns>The property value of the specified object as string.</returns>
+        </member>
+        <member name="M:Syncfusion.Blazor.IPropertyAccessor.SetValue(System.Object,System.Object)">
+            <summary>
+            Sets the property value of a specified object.
+            </summary>
+            <param name="obj">The object whose property value will be set.</param>
+            <param name="value">The property value.</param>
+        </member>
+        <member name="T:Syncfusion.Blazor.IPropertyAccessorProvider">
+            <summary>
+            Interface that declares the methods to be implemented for accessing the properties of an object.
+            </summary>
+            <exclude/>
+        </member>
+        <member name="M:Syncfusion.Blazor.IPropertyAccessorProvider.GetValue(System.Object,System.String)">
+            <summary>
+            Returns the property value of a specified object.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Blazor.IPropertyAccessorProvider.SetValue(System.Object,System.Object,System.String)">
+            <summary>
+            Sets the property value of a specified object.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Blazor.PropertyAccessor`2">
+            <summary>
+            A class that holds get and set accessor of a property which is used to retrive the field values using reflection.
+            </summary>
+            <typeparam name="TObject">Type of object.</typeparam>
+            <typeparam name="TValue">Type of property. </typeparam>
+            <remarks>
+            Use <see cref="M:Syncfusion.Blazor.FastReflectionExtension.CreateAccessor(System.Reflection.PropertyInfo)"/> to create accessor based on type.
+            </remarks>
+        </member>
+        <member name="T:Syncfusion.Blazor.ReflectionExtension">
+            <exclude/>
+        </member>
+        <member name="M:Syncfusion.Blazor.ReflectionExtension.GetValue(System.Object,System.String,System.Boolean)">
+            <summary>
+            Returns the property value of a specified object of any type includes static types, <see cref="T:System.Dynamic.DynamicObject"/> and <see cref="T:System.Dynamic.ExpandoObject"/> types.
+            </summary>
+            <param name="propertyName">The string containing the name of the public property.</param>
+            <param name="obj">The object whose property value will be returned.</param>
+            <param name="reflectComplexProperty">true, if need to reflect complex property. </param>
+            <returns>The property value of the specified object. Also, returns null if <paramref name="obj"/> and <paramref name="propertyName"/> is null or empty.</returns>
+            <remarks>For accessing complex/nested property value, given the propertyName with field names delimited by dot(.).</remarks>
+        </member>
+        <member name="M:Syncfusion.Blazor.ReflectionExtension.TryGetValue(System.Object,System.String,System.Boolean,System.Object@)">
+            <summary>
+            Returns true, the property value of a specified object of any type includes static types, 
+            <see cref="T:System.Dynamic.DynamicObject"/> and <see cref="T:System.Dynamic.ExpandoObject"/> type is set to value parameter.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Blazor.ReflectionExtension.GetValueFromStaticObject(System.Object,System.String)">
+            <summary>
+            Returns the property value of a specified object of type s<see cref="T:System.Dynamic.DynamicObject"/>.
+            </summary>
+            <param name="obj">The object whose property value will be returned.</param>
+            <param name="propertyName">The string containing the name of the public property.</param>
+            <returns>The property value of the specified object.</returns>
+        </member>
+        <member name="M:Syncfusion.Blazor.ReflectionExtension.SetValue(System.Object,System.String,System.Object,System.Boolean,Syncfusion.Blazor.SetOptions)">
+            <summary>
+            Sets the property value of a specified object.
+            </summary>
+            <param name="obj">The object whose property value will set.</param>
+            <param name="propertyName">The string containing the name of the public property.</param>
+            <param name="value">The new property value.</param>
+            <param name="reflectComplexProperty">true, if need to reflect complex property. </param>
+            <param name="options">Options to control set options. </param>
+        </member>
+        <member name="M:Syncfusion.Blazor.ReflectionExtension.GetValueFromDynamicObject(System.Dynamic.DynamicObject,System.String,System.Boolean)">
+            <summary>
+            Returns the property value of a specified object of type <see cref="T:System.Dynamic.DynamicObject"/>.
+            </summary>
+            <param name="propertyName">The string containing the name of the public property.</param>
+            <param name="obj">The object whose property value will be returned.</param>
+            <param name="reflectComplexProperty">true, if need to reflect complex property. </param>
+            <returns>The property value of the specified object.</returns>
+        </member>
+        <member name="M:Syncfusion.Blazor.ReflectionExtension.SetValueToDynamicObject(System.Dynamic.DynamicObject,System.String,System.Object)">
+            <summary>
+            Returns the property value of a specified object of type <see cref="T:System.Dynamic.DynamicObject"/>.
+            </summary>
+            <param name="propertyName">The string containing the name of the public property.</param>
+            <param name="obj">The object whose property value will be returned.</param>
+            <param name="value">The new property value.</param>
+        </member>
+        <member name="M:Syncfusion.Blazor.ReflectionExtension.GetValueFromExpandoObject(System.Collections.Generic.IDictionary{System.String,System.Object},System.String,System.Boolean)">
+            <summary>
+            Returns the property value of a specified object of type <see cref="T:System.Dynamic.ExpandoObject"/>.
+            </summary>
+            <param name="propertyName">The string containing the name of the public property.</param>
+            <param name="obj">The object whose property value will be returned.</param>
+            <param name="reflectComplexProperty">true, if need to reflect complex property. </param>
+            <returns>The property value of the specified object.</returns>
+        </member>
+        <member name="M:Syncfusion.Blazor.ReflectionExtension.SetValueToExpandoObject(System.Collections.Generic.IDictionary{System.String,System.Object},System.String,System.Object)">
+            <summary>
+            Sets the property value of a specified object.
+            </summary>
+            <param name="propertyName">The string containing the name of the public property.</param>
+            <param name="obj">The object whose property value will be returned.</param>
+            <returns>The property value of the specified object.</returns>
+            <param name="value">The new property value.</param>
+        </member>
+        <member name="T:Syncfusion.Blazor.CloneUtils">
+            <exclude/>
+        </member>
+        <member name="M:Syncfusion.Blazor.CloneUtils.Clone(System.Object,System.Type)">
+            <summary>
+            Creates and returns a new object that is a copy of the specified <paramref name="obj"/>.
+            </summary>
+            <param name="obj">The object whose clone will be returned.</param>
+            <param name="type">Type of new object type.</param>
+            <returns>A new object that is a copy of <paramref name="obj"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="obj"/> can't be null.</exception>
+        </member>
+        <member name="M:Syncfusion.Blazor.CloneUtils.CloneStaticObjectType(System.Object,System.Type)">
+            <summary>
+            Creates and returns a new object that is a copy of the specified <paramref name="obj"/>.
+            </summary>
+            <param name="obj">The object whose clone will be returned.</param>
+            <param name="type">Type of new object type.</param>
+            <returns>A new object that is a copy of <paramref name="obj"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="obj"/> can't be null.</exception>
+        </member>
+        <member name="M:Syncfusion.Blazor.CloneUtils.CloneExpandoObject(System.Dynamic.ExpandoObject)">
+            <summary>
+            Creates and returns a new object that is a copy of the specified <paramref name="obj"/>.
+            </summary>
+            <param name="obj">The object whose clone will be returned.</param>
+            <returns>A new object that is a copy of <paramref name="obj"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="obj"/> can't be null.</exception>
+        </member>
+        <member name="M:Syncfusion.Blazor.CloneUtils.CloneDynamicObject(System.Dynamic.DynamicObject,System.Type)">
+            <summary>
+            Creates and returns a new object that is a copy of the specified <paramref name="obj"/>.
+            </summary>
+            <param name="obj">The object whose clone will be returned.</param>
+            <param name="type">Type of new object type.</param>
+            <returns>A new object that is a copy of <paramref name="obj"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="obj"/> can't be null.</exception>
+        </member>
+        <member name="T:Syncfusion.Blazor.SetOptions">
+            <summary>
+            Provides options on conversion, complex property handling 
+            when set the property value of a object.
+            </summary>
+            <exclude/>
+        </member>
+        <member name="P:Syncfusion.Blazor.SetOptions.CreateInstanceForComplexType">
+            <summary>
+            Gets or sets whether to create new instances for setting complex property values.
+            Not applicable for <see cref="T:System.Dynamic.ExpandoObject"/> and <see cref="T:System.Dynamic.DynamicObject"/>.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Blazor.SetOptions.CanConvertToPropertyType">
+            <summary>
+            Gets or sets whether to convert the value to 
+            <see cref="P:System.Reflection.PropertyInfo.PropertyType"/> before set the value.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Blazor.DataMemberBinder">
+            <summary>
+            Defines the data member binder for getting dynamic object property.
+            </summary>
+            <exclude/>
+        </member>
+        <member name="T:Syncfusion.Blazor.DataSetMemberBinder">
+            <summary>
+            Defines the data member binder for setting dynamic object property.
+            </summary>
+            <exclude/>
+        </member>
         <member name="T:Syncfusion.Blazor.SfBaseComponent">
             <summary>
             A Base Component for all the Syncfusion Blazor UI components to implement the common functionalities.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Blazor.SfBaseComponent.PropertyChanges">
+            <summary>
+            A dictionary maintains changes properties names and value. Based on the count, you can refresh UI in OnParametersSetAsync.
+            This dictionary will be cleared in <see cref="M:Syncfusion.Blazor.SfBaseComponent.OnAfterRenderAsync(System.Boolean)"/>. 
+            </summary>
+            <remarks>
+            Changes properties should be added in OnParametersSetAsync by calling <see cref="M:Syncfusion.Blazor.SfBaseComponent.NotifyPropertyChanges``1(System.String,``0,``0,System.Boolean)"/>.
+            </remarks>
+        </member>
+        <member name="P:Syncfusion.Blazor.SfBaseComponent.PrevChanges">
+            <summary>
+            While update the two way binding property value in set method the component change event call repeatedly, 
+            so that we have add the value this dictionary and restrict based on this value.
             </summary>
         </member>
         <member name="M:Syncfusion.Blazor.SfBaseComponent.OnInitializedAsync">
@@ -1772,7 +2043,6 @@
             <summary>
             Adds Syncfusion Blazor service to the <see href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">service collection</see>.
             </summary>
-            <exclude/>
         </member>
         <member name="M:Syncfusion.Blazor.SyncfusionBlazor.AddSyncfusionBlazor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Syncfusion.Blazor.GlobalOptions})">
             <summary>
@@ -2377,6 +2647,27 @@
             <summary>
             Specifies the callback to trigger when the selected chips changes.
             </summary>
+            <remarks>
+            You can get the updated SelectedChips value.
+            </remarks>
+            <example>
+            In the below code example, the SelectedChips value can be obtained from the <c>SelectedChipsChanged</c> event.
+            <code><![CDATA[
+            <SfChip Selection="SelectionType.Multiple" SelectedChipsChanged="SelectedChipsChanged">
+                <ChipItems>
+                    <ChipItem Text = "Small"></ChipItem>
+                    <ChipItem Text = "Medium"></ChipItem>
+                    <ChipItem Text = "Large"></ChipItem>
+                    <ChipItem Text = "Extra Large"></ChipItem>
+                </ChipItems>
+            </SfChip>
+            @code {
+                private void SelectedChipsChanged(string[] args) {
+                    string[] selectedChipItem = args;
+                }
+            }
+            ]]></code>
+            </example>
         </member>
         <member name="P:Syncfusion.Blazor.Buttons.SfChip.Selection">
             <summary>
@@ -3534,6 +3825,11 @@
         <member name="F:Syncfusion.Blazor.Buttons.IconName.Eye">
             <summary>
             Defines eye icon.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Blazor.Buttons.IconName.EyeSlash">
+            <summary>
+            Defines eye slash icon.
             </summary>
         </member>
         <member name="F:Syncfusion.Blazor.Buttons.IconName.FieldSettings">
@@ -6030,9 +6326,6 @@
             <param name="propertyName">property name which is need to distincts </param>.
             <returns>IEnumerable Distinct collections</returns>
         </member>
-        <member name="M:Syncfusion.Blazor.Data.DataUtil.GetValue(System.Int32,System.Object)">
-            <exclude/>
-        </member>
         <member name="M:Syncfusion.Blazor.Data.DataUtil.Group``1(System.Collections.IEnumerable,System.String,System.Collections.Generic.List{Syncfusion.Blazor.Data.Aggregate},System.Int32,System.Collections.Generic.IDictionary{System.String,System.String},System.Boolean,System.Boolean)">
             <summary>
             Groups the given data source with the field name.
@@ -6111,11 +6404,6 @@
             <param name="name">Property name to get.</param>
             <returns>object.</returns>
         </member>
-        <member name="T:Syncfusion.Blazor.Data.DataMemberBinder">
-            <summary>
-            Defines the data member binder for setting dynamic object property.
-            </summary>
-        </member>
         <member name="T:Syncfusion.Blazor.Data.DynamicQueryableExtensions">
             <summary>
             Provides extension methods for Queryable source.
@@ -6187,12 +6475,13 @@
             <param name="grouped">List of column names by which rows will be grouped.</param>
             <returns>IEnumerable.</returns>
         </member>
-        <member name="M:Syncfusion.Blazor.Data.EnumerableOperation.PerformSorting(System.Collections.IEnumerable,System.Collections.Generic.List{Syncfusion.Blazor.Data.SortedColumn})">
+        <member name="M:Syncfusion.Blazor.Data.EnumerableOperation.PerformSorting(System.Collections.IEnumerable,System.Collections.Generic.List{Syncfusion.Blazor.Data.SortedColumn},System.Type)">
             <summary>
             Sorts the data source using the given sort descriptor and returns the sorted records.
             </summary>
             <param name="dataSource">Data source to be sorted.</param>
             <param name="sortedColumns">List of sort criteria.</param>
+            <param name="sourceType">Specifies the source type.</param>
             <returns>IEnumerable - sorted records.</returns>
         </member>
         <member name="M:Syncfusion.Blazor.Data.EnumerableOperation.PerformSorting(System.Collections.IEnumerable,System.Collections.Generic.List{Syncfusion.Blazor.Data.Sort})">
@@ -7393,7 +7682,7 @@
             Sorts the data source using the given sort descriptor and returns the sorted records.
             </summary>
             <param name="dataSource">Data source to be sorted.</param>
-            <param name="sortedColumns">List of sort criteria.</param>
+            <param name="sortColumns">List of sort criteria.</param>
             <returns>IQueryable - sorted records.</returns>
         </member>
         <member name="M:Syncfusion.Blazor.Data.QueryableOperation.PerformSkip``1(System.Linq.IQueryable{``0},System.Int32)">
@@ -9895,6 +10184,162 @@
             This method releasing all unmanaged resources.
             </summary>
         </member>
+        <member name="T:Syncfusion.Blazor.Diagram.IDiagramPrintExportSettings">
+            <summary> 
+            Represents the common configuration settings for printing  and exporting the diagram.  
+            </summary> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.IDiagramPrintExportSettings.PageHeight">
+            <summary> 
+            Gets or sets the height of the page to be printed. 
+            </summary> 
+            <value>The height of the page to be printed. The default value will be <seealso cref="P:Syncfusion.Blazor.Diagram.PageSettings.Height"/>.</value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.IDiagramPrintExportSettings.PageWidth">
+            <summary> 
+            Gets or sets the width of the page to be printed. 
+            </summary> 
+            <value>The width of the page to be printed. The default value will be <seealso cref="P:Syncfusion.Blazor.Diagram.PageSettings.Width"/>.</value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.IDiagramPrintExportSettings.Margin">
+            <summary> 
+            Gets or sets the margin of the page to be printed/exported. 
+            </summary> 
+            <value>Space around the content to be printed/exported.The default value for margin is 25 for all sides.</value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.IDiagramPrintExportSettings.Orientation">
+            <summary> 
+            Gets or sets the orientation of the page to be printed. 
+            </summary> 
+            <value>One of the <see cref="T:Syncfusion.Blazor.Diagram.PageOrientation"/> enumeration values. The default value is <seealso cref="F:Syncfusion.Blazor.Diagram.PageOrientation.Landscape"/>. </value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.IDiagramPrintExportSettings.FitToPage">
+            <summary> 
+            Gets or sets the value to indicate whether to print or export the entire diagram to single page or multiple pages. 
+            </summary> 
+            <value> true, if the diagram printed or exported to single page. Otherwise, diagram printed or exported into multiple pages or images. The default value is false. </value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.IDiagramPrintExportSettings.Region">
+            <summary> 
+            Gets or sets the region in the diagram which need to be printed or exported. 
+            </summary> 
+            <value>One of the <see cref="T:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion"/> enumeration values. The default value is <seealso cref="F:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion.PageSettings"/></value>
+            <remarks> 
+            * PageSettings - The region within the x,y, width and height values of page settings is printed or exported. 
+            * Content – Content of the diagram without empty space around the content is printed or exported. 
+            * ClipBounds - The region specified using <see cref="P:Syncfusion.Blazor.Diagram.DiagramPrintSettings.ClipBounds"/> property is exported. This is applicable for exporting only. 
+            </remarks> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.IDiagramPrintExportSettings.ClipBounds">
+            <summary> 
+            Gets or sets the region that to be exported when <see cref="P:Syncfusion.Blazor.Diagram.IDiagramPrintExportSettings.Region"/> is <see cref="F:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion.ClipBounds"/>. 
+            </summary> 
+            <value>The bounds to be used for clipping area sizing. The default is a <seealso cref="T:Syncfusion.Blazor.Diagram.DiagramRect"/>(0,0,0,0)</value> 
+        </member>
+        <member name="T:Syncfusion.Blazor.Diagram.DiagramPrintSettings">
+            <summary> 
+            Represents the configuration settings for printing the diagram. 
+            </summary> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramPrintSettings.PageHeight">
+            <summary> 
+            Gets or sets the height of the page to be printed. 
+            </summary> 
+            <value>The height of the page to be printed. The default value will be <seealso cref="P:Syncfusion.Blazor.Diagram.PageSettings.Height"/>.</value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramPrintSettings.PageWidth">
+            <summary> 
+            Gets or sets the width of the page to be printed. 
+            </summary> 
+            <value>The width of the page to be printed. The default value will be <seealso cref="P:Syncfusion.Blazor.Diagram.PageSettings.Width"/>.</value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramPrintSettings.Margin">
+            <summary> 
+            Gets or sets the margin of the page to be printed/exported. 
+            </summary> 
+            <value>Space around the content to be printed/exported.The default value for margin is 25 for all sides.</value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramPrintSettings.Orientation">
+            <summary> 
+            Gets or sets the orientation of the page to be printed. 
+            </summary> 
+            <value>One of the <see cref="T:Syncfusion.Blazor.Diagram.PageOrientation"/> enumeration values. The default value is <seealso cref="F:Syncfusion.Blazor.Diagram.PageOrientation.Landscape"/>. </value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramPrintSettings.FitToPage">
+            <summary> 
+            Gets or sets the value to indicate whether to print or export the entire diagram to single page or multiple pages. 
+            </summary> 
+            <value> true, if the diagram printed or exported to single page. Otherwise, diagram printed or exported into multiple pages or images. The default value is false. </value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramPrintSettings.Region">
+             <summary> 
+             Gets or sets the region in the diagram which need to be printed or exported. 
+            </summary> 
+             <value>One of the <see cref="T:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion"/> enumeration values. The default value is <seealso cref="F:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion.PageSettings"/> </value>
+            <remarks> 
+             * PageSettings - The region within the x,y, width and height values of page settings is printed or exported. 
+             * Content – Content of the diagram without empty space around the content is printed or exported. 
+             * ClipBounds - The region specified using <see cref="P:Syncfusion.Blazor.Diagram.DiagramPrintSettings.ClipBounds"/> property is exported. This is applicable for exporting only. 
+             </remarks> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramPrintSettings.ClipBounds">
+            <summary> 
+            Gets or sets the region that to be exported when <see cref="P:Syncfusion.Blazor.Diagram.DiagramPrintSettings.Region"/> is <see cref="F:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion.ClipBounds"/>. 
+            </summary> 
+            <value>The bounds to be used for clipping area sizing. The default is a <seealso cref="T:Syncfusion.Blazor.Diagram.DiagramRect"/>(0,0,0,0)</value> 
+        </member>
+        <member name="T:Syncfusion.Blazor.Diagram.DiagramExportSettings">
+            <summary> 
+            Represents the configuration settings for exporting the diagram. 
+            </summary> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramExportSettings.PageHeight">
+            <summary> 
+            Gets or sets the height of the page to be printed. 
+            </summary> 
+            <value>The height of the page to be printed. The default value will be <seealso cref="P:Syncfusion.Blazor.Diagram.PageSettings.Height"/>.</value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramExportSettings.PageWidth">
+            <summary> 
+            Gets or sets the width of the page to be printed. 
+            </summary> 
+            <value>The width of the page to be printed. The default value will be <seealso cref="P:Syncfusion.Blazor.Diagram.PageSettings.Width"/>.</value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramExportSettings.Margin">
+            <summary> 
+            Gets or sets the margin of the page to be printed/exported. 
+            </summary> 
+            <value>Space around the content to be printed/exported.The default value for margin is 25 for all sides.</value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramExportSettings.Orientation">
+            <summary> 
+            Gets or sets the orientation of the page to be printed. 
+            </summary> 
+            <value>One of the <see cref="T:Syncfusion.Blazor.Diagram.PageOrientation"/> enumeration values. The default value is <seealso cref="F:Syncfusion.Blazor.Diagram.PageOrientation.Landscape"/>. </value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramExportSettings.FitToPage">
+            <summary> 
+            Gets or sets the value to indicate whether to print or export the entire diagram to single page or multiple pages. 
+            </summary> 
+            <value> true, if the diagram printed or exported to single page. Otherwise, diagram printed or exported into multiple pages or images. The default value is false. </value> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramExportSettings.Region">
+            <summary> 
+            Gets or sets the region in the diagram which need to be printed or exported. 
+            </summary> 
+            <value>One of the <see cref="T:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion"/> enumeration values. The default value is <see cref="F:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion.PageSettings"/></value>
+            <remarks> 
+            * PageSettings - The region within the x,y, width and height values of page settings is printed or exported. 
+            * Content – Content of the diagram without empty space around the content is printed or exported. 
+            * ClipBounds - The region specified using <see cref="P:Syncfusion.Blazor.Diagram.DiagramExportSettings.ClipBounds"/> property is exported. This is applicable for exporting only. 
+            </remarks> 
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.DiagramExportSettings.ClipBounds">
+            <summary> 
+            Gets or sets the region that to be exported when <see cref="P:Syncfusion.Blazor.Diagram.DiagramExportSettings.Region"/> is <see cref="F:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion.ClipBounds"/>. 
+            </summary> 
+            <value>The bounds to be used for clipping area sizing. The default is a <seealso cref="T:Syncfusion.Blazor.Diagram.DiagramRect"/>(0,0,0,0)</value> 
+        </member>
         <member name="T:Syncfusion.Blazor.Diagram.BackgroundStyle">
             <summary>
             Represents the characteristics of the background of the diagram.
@@ -12192,25 +12637,26 @@
             Allow interactions to take place around the height and width mentioned in the page settings.
             </summary>
         </member>
-        <member name="T:Syncfusion.Blazor.Diagram.DiagramRegions">
-            <summary>
-            Specifies the region that has to be drawn as an image
-            </summary>
+        <member name="T:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion">
+            <summary> 
+            Specifies the region that has to be printed or exported in diagram. 
+            </summary> 
         </member>
-        <member name="F:Syncfusion.Blazor.Diagram.DiagramRegions.PageSettings">
-            <summary>
-            Sets to export the diagram with the given page settings.
-            </summary>
+        <member name="F:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion.PageSettings">
+            <summary> 
+            Specifies the region within the x,y, width and height values of page settings is printed or exported. 
+            </summary> 
         </member>
-        <member name="F:Syncfusion.Blazor.Diagram.DiagramRegions.Content">
-            <summary>
-            Sets to export the diagram content alone.
-            </summary>
+        <member name="F:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion.Content">
+            <summary> 
+            Specifies the content of the diagram without empty space around the content is printed or exported. 
+            </summary> 
         </member>
-        <member name="F:Syncfusion.Blazor.Diagram.DiagramRegions.CustomBounds">
-            <summary>
-            Sets to export the diagram with the given bounds.
-            </summary>
+        <member name="F:Syncfusion.Blazor.Diagram.DiagramPrintExportRegion.ClipBounds">
+             <summary> 
+             Specifies the region specified using <see cref="P:Syncfusion.Blazor.Diagram.DiagramExportSettings.ClipBounds"/> property is exported. This is applicable for exporting only. 
+             </summary> 
+            <remarks>This is applicable only for diagram exporting</remarks> 
         </member>
         <member name="T:Syncfusion.Blazor.Diagram.ImageAlignment">
             <summary>
@@ -12347,6 +12793,26 @@
         <member name="F:Syncfusion.Blazor.Diagram.ScrollLimitMode.Limited">
             <summary>
             Enables scrolling to view the specified area.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Blazor.Diagram.DiagramExportFormat">
+            <summary>
+            File Format type for export.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Blazor.Diagram.DiagramExportFormat.JPEG">
+            <summary>
+            Save the file in JPG Format
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Blazor.Diagram.DiagramExportFormat.PNG">
+            <summary>
+            Save the file in PNG Format
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Blazor.Diagram.DiagramExportFormat.SVG">
+            <summary>
+            Save the file in SVG Format
             </summary>
         </member>
         <member name="T:Syncfusion.Blazor.Diagram.Stretch">
@@ -12745,6 +13211,11 @@
         <member name="F:Syncfusion.Blazor.Diagram.Actions.PortDraw">
             <summary>
             Notifies the port draw action when drawing the connector from the port.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Blazor.Diagram.Actions.PinchZoom">
+            <summary>
+            Notifies to interact the zoom action through touch.
             </summary>
         </member>
         <member name="T:Syncfusion.Blazor.Diagram.InteractionController">
@@ -16459,7 +16930,7 @@
             Notifies the mouse events, keyboard and scrolling action in the diagram.
             </summary>
         </member>
-        <member name="P:Syncfusion.Blazor.Diagram.Internal.JSMouseEventArgs.EventInvokeValue">
+        <member name="P:Syncfusion.Blazor.Diagram.Internal.JSMouseEventArgs.IsPan">
             <summary>
              Represents the scroller related actions to conform whether the scroller is updated or not in UI level. 
             </summary>
@@ -16552,6 +17023,41 @@
         <member name="P:Syncfusion.Blazor.Diagram.Internal.JSMouseEventArgs.Button">
             <summary>
             Represents the button that has been clicked in the diagram.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.Internal.JSMouseEventArgs.Touches">
+            <summary>
+            Represents the collection of touches while is tap inside the diagram.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.Internal.ITouches.PageX">
+            <summary>
+             Represents the horizontal distance between the left side of the diagram page. 
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.Internal.ITouches.PageY">
+            <summary>
+            Represents the vertical distance between the left side of the diagram page.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.Internal.ITouches.ScreenX">
+            <summary>
+            Represents the horizontal distance between the left side of the screen. 
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.Internal.ITouches.ScreenY">
+            <summary>
+            Represents the vertical distance between the top side of the screen. 
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.Internal.ITouches.ClientX">
+            <summary>
+            Represents the horizontal coordinate of a touch point relative to the  viewport. 
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.Internal.ITouches.ClientY">
+            <summary>
+            Represents the vertical coordinate of a touch point relative to the viewport.
             </summary>
         </member>
         <member name="T:Syncfusion.Blazor.Diagram.Internal.TransformFactor">
@@ -21555,6 +22061,76 @@
              It allows the user to clear the selected nodes/connectors in the diagram. 
              </summary>        
         </member>
+        <member name="M:Syncfusion.Blazor.Diagram.SfDiagramComponent.PrintAsync(Syncfusion.Blazor.Diagram.DiagramPrintSettings)">
+             <summary> 
+             Prints the diagram pages based on <see cref="T:Syncfusion.Blazor.Diagram.DiagramPrintSettings"/>. 
+             </summary>
+             <param name="printSettings">Specifies the configuration settings to print the diagram. </param> 
+            <returns> The <see cref="T:System.Threading.Tasks.Task"/> that completes when the diagram is sent to browser print preview window for printing.</returns> 
+             examples for the following:
+            <example>
+            <code>
+             DiagramPrintSettings print = new DiagramPrintSettings();
+             print.PageWidth = 816;
+             print.PageHeight = 1054;
+             print.Region = DiagramPrintExportRegion.PageSettings;
+             print.FitToPage = true;
+             print.Orientation = PageOrientation.Landscape;
+             print.Margin = new Margin() { Left = 10, Top = 10, Right = 10, Bottom = 10 };
+             await diagram.PrintAsync(print);
+            </code>
+            </example>
+        </member>
+        <member name="M:Syncfusion.Blazor.Diagram.SfDiagramComponent.ExportAsync(System.String,Syncfusion.Blazor.Diagram.DiagramExportFormat,Syncfusion.Blazor.Diagram.DiagramExportSettings)">
+             <summary> 
+             Exports the rendered diagram to various file types. It supports jpeg, png, svg ,bmp and pdf file types. Exported file will get download at client machine.  
+             </summary> 
+             <param name="fileName">Specifies the filename without extension. </param> 
+             <param name="fileFormat"> Specifies the export type for the rendered diagram </param> 
+             <param name="exportSettings"> Specifies the configutation settings to export the diagram </param> 
+            <remarks>Diagram supports jepg, png and svg file types. </remarks>  
+             examples for the following:
+            <example>
+            <code>
+              DiagramExportSettings export = new DiagramExportSettings();
+              export.Region = DiagramPrintExportRegion.PageSettings;
+              export.PageWidth = 816;
+              export.PageHeight = 1054;
+              export.Orientation = PageOrientation.Landscape;
+              export.FitToPage = true;
+              export.Margin = new Margin() { Left = 10, Top = 10, Right = 10, Bottom = 10 };
+              export.ClipBounds = new DiagramRect() { X = 0, Y = 0, Width = 0, Height = 0 };
+              //To export the diagram
+              await diagram.ExportAsync("diagram", format, print);
+            </code>
+            </example>
+        </member>
+        <member name="M:Syncfusion.Blazor.Diagram.SfDiagramComponent.ExportAsync(Syncfusion.Blazor.Diagram.DiagramExportFormat,Syncfusion.Blazor.Diagram.DiagramExportSettings)">
+             <summary> 
+             Exports the diagram to base64 string. Exported string can be returned.  
+             </summary> 
+             <param name="fileFormat">Specifies the export type for the rendered diagram.</param> 
+             <param name="exportSettings"> Specifies the configutation settings to export the diagram </param> 
+             <returns> The exported diagram as base64 string of the specified file type</returns> 
+             examples for the following:
+            <example>
+            <code>
+              DiagramExportSettings export = new DiagramExportSettings();
+              export.Region = DiagramPrintExportRegion.PageSettings;
+              export.PageWidth = 816;
+              export.PageHeight = 1054;
+              export.Orientation = PageOrientation.Landscape;
+              export.FitToPage = true;
+              export.Margin = new Margin() { Left = 10, Top = 10, Right = 10, Bottom = 10 };
+              export.ClipBounds = new DiagramRect() { X = 0, Y = 0, Width = 0, Height = 0 };
+              //To export the diagram
+               string[] base64 = await diagram.ExportAsync(DiagramExportFormat.PNG, export);
+            </code>
+            </example>
+        </member>
+        <member name="M:Syncfusion.Blazor.Diagram.SfDiagramComponent.GetDiagramBounds(Syncfusion.Blazor.Diagram.DiagramPrintExportRegion,Syncfusion.Blazor.Diagram.DiagramExportFormat)">
+              @private  
+        </member>
         <member name="M:Syncfusion.Blazor.Diagram.SfDiagramComponent.Drag(Syncfusion.Blazor.Diagram.IDiagramObject,System.Double,System.Double)">
             <summary>
             It drags the given object by the specified pixels. 
@@ -21643,6 +22219,11 @@
             This method helps to clone the diagram.
             </summary>
             <returns>Diagram</returns>
+        </member>
+        <member name="M:Syncfusion.Blazor.Diagram.SymbolPalette.Internal.SfSymbolPaletteEventHandler.InvokeDiagramEvents(Syncfusion.Blazor.Diagram.Internal.JSMouseEventArgs)">
+            <summary>
+            Used to invoke the diagram's touch events while drag and drop the objects from the palettte.
+            </summary>
         </member>
         <member name="T:Syncfusion.Blazor.Diagram.SymbolPalette.SfSymbolPaletteComponent">
             <summary>
@@ -21750,6 +22331,30 @@
             <summary>
             Sets an  extra space around the outer boundaries of an element.
             </summary>
+        </member>
+        <member name="P:Syncfusion.Blazor.Diagram.SymbolPalette.SfSymbolPaletteComponent.PaletteExpandMode">
+            <summary>
+            Specifies the option to expand single or multiple palette at a time.
+            </summary>
+            <value>
+            One of the <see cref="T:Syncfusion.Blazor.Navigations.ExpandMode"/> enumeration. The default value is <see cref="F:Syncfusion.Blazor.Navigations.ExpandMode.Multiple"/>
+            </value>
+            <remarks>
+            If the <c>ExpandMode</c> is <c>Multiple</c> when clicking on the collapsed icon, the clicked palette will get expanded and at the same time, other palettes are maintained in their previous state.
+            If the <c>ExpandMode</c> is <c>Single</c> when clicking on the collapsed icon, the clicked palette will get expanded and the rest of all the palettes gets collapsed.
+            </remarks>
+            <example>
+            <code>
+            <![CDATA[
+            <SfSymbolPaletteComponent @ref="@palette"
+                                       Width="80%"
+                                       Height="445px"
+                                       PaletteExpandMode="@expandMode"
+                                       Palettes="@palettes">
+            </SfSymbolPaletteComponent>
+            ]]>
+            </code>
+            </example>
         </member>
         <member name="P:Syncfusion.Blazor.Diagram.SymbolPalette.SfSymbolPaletteComponent.NodeCreating">
             <summary>
@@ -25662,7 +26267,7 @@
         </member>
         <member name="P:Syncfusion.Blazor.DropDowns.PopupEventArgs.Popup">
             <summary>
-            Specifies the popuo Object.
+            Specifies the popup Object.
             </summary>
         </member>
         <member name="T:Syncfusion.Blazor.DropDowns.ResultData">
@@ -31810,12 +32415,22 @@
             Specifies the input is focused state.
             </summary>
         </member>
+        <member name="P:Syncfusion.Blazor.Inputs.SfNumericTextBox`1.minMaxValue">
+            <summary>
+            Set the min and max validation value to the property.
+            </summary>
+        </member>
         <member name="M:Syncfusion.Blazor.Inputs.SfNumericTextBox`1.OnInitializedAsync">
             <summary>
             Triggers while initial rendering of the component.
             </summary>
             <returns>Task.</returns>
             <exclude/>
+        </member>
+        <member name="M:Syncfusion.Blazor.Inputs.SfNumericTextBox`1.SetCssClass">
+            <summary>
+            Set the css class to component container element.
+            </summary>
         </member>
         <member name="M:Syncfusion.Blazor.Inputs.SfNumericTextBox`1.OnParametersSetAsync">
             <summary>
@@ -32451,11 +33066,6 @@
         <member name="P:Syncfusion.Blazor.Inputs.SfSlider`1.Slider">
             <summary>
             Get and set the Slider.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Inputs.SfSlider`1.SetTickPosition(Syncfusion.Blazor.Inputs.TicksValues)">
-            <summary>
-            Method which sets the tick's position.
             </summary>
         </member>
         <member name="M:Syncfusion.Blazor.Inputs.SfSlider`1.SetLocale">
@@ -34535,1678 +35145,6 @@
             Gets or sets the EqualTo property.
             </summary>
         </member>
-        <member name="T:Syncfusion.Blazor.Lists.ListViewEffect">
-            <summary>
-            An enum type that denotes the animation effects of the ListView. Available options are as follows None, SlideLeft, SlideDown, Zoom, Fade.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.ListViewEffect.None">
-            <summary>
-            Navigation of the nested list item occurs with out any animation effect.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.ListViewEffect.SlideLeft">
-            <summary>
-            Navigation of the nested list item occurs with a slide left animation effect.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.ListViewEffect.SlideDown">
-            <summary>
-            Navigation of the nested list item occurs with a slide down animation effect.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.ListViewEffect.Zoom">
-            <summary>
-            Navigation of the nested list item occurs with a zooming animation effect.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.ListViewEffect.Fade">
-            <summary>
-            Navigation of the nested list item occurs with a fading animation effect.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.CheckBoxPosition">
-            <summary>
-            An enum type that denotes the position of checkbox of the ListView. Available options are as follows Left and Right.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.CheckBoxPosition.Left">
-            <summary>
-            Positions the checkbox to the left of the text content.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.CheckBoxPosition.Right">
-            <summary>
-            Positions the checkbox to the right of the text content.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.SortOrder">
-            <summary>
-            An enum type that denotes the sort order of the ListView. Available options are as follows None, Ascending, Descending.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.SortOrder.None">
-            <summary>
-            The list view items will be displayed without performing any sorting.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.SortOrder.Ascending">
-            <summary>
-            Sorts the list view items will be displayed in the ascending order.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.SortOrder.Descending">
-            <summary>
-            Sorts the list view items will be displayed in the descending order.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.ListBaseFoundation`1">
-            <exclude/>
-            <summary>
-            A list base component for all the Syncfusion Blazor List dependant components to implement the common functionalities.
-            </summary>
-            <typeparam name="T">The first generic type parameter.</typeparam>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.ListBaseFoundation`1.OnInitialized">
-            <summary>
-            Method invoked when the component is ready to start.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.ListBaseFoundation`1.MapSettings(Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel{`0})">
-            <summary>
-            maps the default setting for the list generated.
-            </summary>
-            <param name="options">Specifies mapping options.</param>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.ListBaseFoundation`1.GetConvertedData(`0,System.String)">
-            <summary>
-            get the converted data using field values.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.ListBaseFoundation`1.GetSortedData">
-            <summary>
-            Sorts the given list items with complex datasource.
-            </summary>
-            <returns> Returns the sorted data.</returns>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.ListBaseFoundation`1.GetSortedArrayData">
-            <summary>
-            Sorts the given list items with primitive datasource.
-            </summary>
-            <returns> Returns the sorted array data.</returns>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.ListBaseFoundation`1.ComposeGroupData">
-            <summary>
-            groups the given list items with complex datasource.
-            </summary>
-            <returns> Returns the grouped data.</returns>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.ListBaseFoundation`1.InvokeItemCreate(`0,Syncfusion.Blazor.Lists.Internal.FieldsValueMapping{System.Collections.Generic.List{`0}},System.Boolean)">
-            <summary>
-            ItemCreated event invoke method.
-            </summary>
-            <param name="item">Specifies the item details.</param>
-            <param name="mappedData">Specifies the mapped data.</param>
-            <param name="isCreated">Specified the created parameter.</param>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1">
-            <exclude/>
-            <summary>
-            Component to create list from complex data for executing complex list items common functionalities.
-            </summary>
-            <typeparam name="TValue">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.ChildContent">
-            <summary>
-            Defines the content which has to be passed.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.LiElementPosition">
-            <summary>
-            Defines the li element position.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.ListId">
-            <summary>
-            Defines the id property.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.ListBase">
-            <summary>
-            Gets or sets ListBase component.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.MappedData">
-            <summary>
-            Gets or sets MappedData.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.ListIsGroupItem">
-            <summary>
-            Gets or sets IsGroupItem field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.Data">
-            <summary>
-            Gets or sets Data field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.GroupItemData">
-            <summary>
-            Gets or sets GroupItemData field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.ListIsItemTemplate">
-            <summary>
-            Gets or sets the item template field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.ListIsGroupTemplate">
-            <summary>
-            Gets or sets the group item template field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.RandomID">
-            <summary>
-            Gets or sets the random id field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.Index">
-            <summary>
-            Gets or sets the index field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.ListClassNames">
-            <summary>
-            Gets or sets the class names field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.SfListBaseOptionModel">
-            <summary>
-            Gets or sets the ListBaseOptionModel field.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.OnInitialized">
-            <summary>
-            Method invoked when the component is ready to start.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.OnParametersSetAsync">
-            <summary>
-            Method invoked when any changes in component state occurs.
-            </summary>
-            <returns>Task.</returns>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.OnParametersSet">
-            <summary>
-            Method invoked when any changes in component state occurs.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.CreateListFromComplex`1.OnAfterRender(System.Boolean)">
-            <summary>
-            Method invoked after each time the component has been rendered.
-            </summary>
-            <param name="firstRender">Set to true for the first time component rendering; otherwise gets false.</param>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1">
-            <summary>
-            List base fields class.
-            </summary>
-            <typeparam name="TValue">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.ListBase">
-            <summary>
-            Specifies that fields that mapped in DataSource.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.Child">
-            <summary>
-            Specifies that fields that mapped in Child.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.Enabled">
-            <summary>
-            Specifies that fields that mapped in Enabled.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.GroupBy">
-            <summary>
-            Specifies that fields that mapped in GroupBy.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.HtmlAttributes">
-            <summary>
-            Specifies that fields that mapped in HtmlAttributes.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.IconCss">
-            <summary>
-            Specifies that fields that mapped in IconCss.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.Id">
-            <summary>
-            Specifies that fields that mapped in Id.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.IsChecked">
-            <summary>
-            Specifies that fields that mapped in IsChecked.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.IsVisible">
-            <summary>
-            Specifies that fields that mapped in IsVisible.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.Text">
-            <summary>
-            Specifies that fields that mapped in Text.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.Tooltip">
-            <summary>
-            Specifies that fields that mapped in Tooltip.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.Value">
-            <summary>
-            Specifies that fields that mapped in Value.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.OnInitialized">
-            <summary>
-            Method invoked when the component is ready to start.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.ListBaseFields`1.ComponentDispose">
-            <summary>
-            The virtual method to override the Dispose method at component side.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.Position">
-            <summary>
-            An enum type that denotes the expand and collapse icon positions. Available options are as follows Right, Left.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.Internal.Position.Right">
-            <summary>
-            Positions the expand collapse icon to the right end of the item.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.Internal.Position.Left">
-            <summary>
-            Positions the expand collapse icon to the left end of the item.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.ListElementReference">
-            <exclude/>
-            <summary>
-            Class for data of each li element.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListElementReference.ElementId">
-            <summary>
-            It is used to denote the element Id.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListElementReference.Key">
-            <summary>
-            It is used to denote the datasource key.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListElementReference.IsChecked">
-            <summary>
-            It is used to check whether the element is checked or not.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListElementReference.IsInteracted">
-            <summary>
-            It is used to check whether the element is interacted or not.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListElementReference.Level">
-            <summary>
-            It denotes the level of the nested list items.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.ClassList">
-            <summary>
-            An class that holds item class list.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ClassList.Check">
-            <summary>
-            Specifies the check.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ClassList.Checked">
-            <summary>
-            It is used to check the element.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ClassList.Disabled">
-            <summary>
-            It is used to disable the element.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ClassList.Group">
-            <summary>
-            It is used to group the elements.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ClassList.HasChild">
-            <summary>
-            It is used to check whether the li element has class child or not.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ClassList.Icon">
-            <summary>
-            It is used to specify the icons for list item.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ClassList.IconWrapper">
-            <summary>
-            It is used to specify the icon wrapper class.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ClassList.Level">
-            <summary>
-            It is used to specify the level of the list item.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ClassList.Li">
-            <summary>
-            It is used to specify the list item.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ClassList.Text">
-            <summary>
-            It is used to specify the text for list item.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ClassList.TextContent">
-            <summary>
-            It is used to specify the text content for list item.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ClassList.Ul">
-            <summary>
-            It is used to specify UI element.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.FieldsValueMapping`1">
-            <summary>
-            An class that holds the field values Mapping.
-            </summary>
-            <typeparam name="T">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.FieldsValueMapping`1.Child">
-            <summary>
-            Specifies the Child field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.FieldsValueMapping`1.GroupBy">
-            <summary>
-            Specifies the GroupBy field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.FieldsValueMapping`1.IconCss">
-            <summary>
-            Specifies the IconCss field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.FieldsValueMapping`1.Id">
-            <summary>
-            Specifies the Id field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.FieldsValueMapping`1.Text">
-            <summary>
-            Specifies the Text field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.FieldsValueMapping`1.Value">
-            <summary>
-            Specifies the Value field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.FieldsValueMapping`1.Tooltip">
-            <summary>
-            Specifies the Tooltip field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.FieldsValueMapping`1.Enabled">
-            <summary>
-            Specifies the Enabled field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.FieldsValueMapping`1.IsChecked">
-            <summary>
-            Specifies the IsChecked field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.FieldsValueMapping`1.IsVisible">
-            <summary>
-            Specifies the IsVisible field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.FieldsValueMapping`1.HtmlAttributes">
-            <summary>
-            Specifies the HtmlAttributes field.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.ListItemBase`1">
-            <summary>
-            An class that holds list Item properties related arguments.
-            </summary>
-            <typeparam name="T">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListItemBase`1.ListBase">
-            <summary>
-            Gets or sets ListBase component.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListItemBase`1.MappedData">
-            <summary>
-            Gets or sets MappedData.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListItemBase`1.IsGroupItem">
-            <summary>
-            Gets or sets IsGroupItem field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListItemBase`1.Data">
-            <summary>
-            Gets or sets Data field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListItemBase`1.GroupItemData">
-            <summary>
-            Gets or sets GroupItemData field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListItemBase`1.IsItemTemplate">
-            <summary>
-            Gets or sets the item template field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListItemBase`1.IsGroupTemplate">
-            <summary>
-            Gets or sets the group item template field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListItemBase`1.RandomID">
-            <summary>
-            Gets or sets the random id field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListItemBase`1.Index">
-            <summary>
-            Gets or sets the index field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListItemBase`1.ClassNames">
-            <summary>
-            Gets or sets the class names field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListItemBase`1.ListBaseOptionModel">
-            <summary>
-            Gets or sets the ListBaseOptionModel field.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1">
-            <summary>
-            This class holds listbase properties related arguments.
-            </summary>
-            <typeparam name="T">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.ListParent">
-            <summary>
-            Gets or sets ListParent component.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.DataSource">
-            <summary>
-            Gets or sets DataSource field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.ListBaseOptionModel">
-            <summary>
-            Gets or sets ListBaseOptionModel field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.Level">
-            <summary>
-            Gets or sets ListBaseOptionModel field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.ItemCreating">
-            <summary>
-            Specifies the callback function that triggered before each list creation.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.ItemCreated">
-            <summary>
-            Specifies the callback function that triggered after each list creation.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.ItemTemplatePropertyName">
-            <summary>
-            Gets or sets item template property name.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.GroupTemplatePropertyName">
-            <summary>
-            Gets or sets group template property name.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.StartingPosition">
-            <summary>
-            Gets or sets starting position.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.LiElementHeight">
-            <summary>
-            Gets or sets list element height.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.EndPosition">
-            <summary>
-            Gets or sets end position.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.Id">
-            <summary>
-            Gets or sets Id.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.VirtualScrolling">
-            <summary>
-            Gets or sets the virtual scrolling.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.CheckBoxPosition">
-            <summary>
-            Gets or sets the checkbox position.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.Template">
-            <summary>
-            Gets or sets the template.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListCommonBase`1.GroupTemplate">
-            <summary>
-            Gets or sets the group template.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.ItemCreatedArgs`1">
-            <summary>
-            An class that holds item created event arguments.
-            </summary>
-            <typeparam name="T">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ItemCreatedArgs`1.CurData">
-            <summary>
-            Specifies the current data arguement.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ItemCreatedArgs`1.ListsDataSource">
-            <summary>
-            Specifies the datasource arguement.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ItemCreatedArgs`1.ListsFields">
-            <summary>
-            Specifies the fields arguement.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ItemCreatedArgs`1.ListsItem">
-            <summary>
-            Specifies the item arguement.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ItemCreatedArgs`1.ListsOptions">
-            <summary>
-            Specifies the options arguement.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ItemCreatedArgs`1.Text">
-            <summary>
-            Specifies the text arguement.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ItemCreatedArgs`1.Name">
-            <summary>
-            Specifies the name arguement.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1">
-            <summary>
-            Basic ListBase Options.
-            </summary>
-            <typeparam name="T">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.IsSingleLevel">
-            <summary>
-            Specifies to data is singel level or not.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.AriaAttributes">
-            <summary>
-            Specifies the aria attributes.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.ExpandCollapse">
-            <summary>
-            Specifies to show collapsible icon.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.ExpandIconClass">
-            <summary>
-            Specifies the customizable expand icon class.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.ExpandIconPosition">
-            <summary>
-            Specifies the expand/collapse icon position.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.Fields">
-            <summary>
-            Specifies that fields that mapped in dataSource.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.GroupTemplate">
-            <summary>
-            Specifies the group header template.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.HeaderTemplate">
-            <summary>
-            Specifies the ListView header template.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.ItemClass">
-            <summary>
-            Specifies when need to add additional LI item class.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.ItemCreated">
-            <summary>
-            Specifies the callback function that triggered after each list creation.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.ItemCreating">
-            <summary>
-            Specifies the callback function that triggered before each list creation.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.ModuleName">
-            <summary>
-            Specifies the customized class name based on their module name.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.ShowCheckBox">
-            <summary>
-            Specifies to show checkBox.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.ShowIcon">
-            <summary>
-            Specifies to show icon.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.SortOrder">
-            <summary>
-            Specifies the sort order.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListBaseOptionModel`1.Template">
-            <summary>
-            Specifies the item template.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.CreateListFromPrimitive`1">
-            <exclude/>
-            /// <summary>
-            Component for executing primitive list items common functionalities.
-            </summary>
-            <typeparam name="TValue">The generic type parameter.</typeparam>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.CreateListFromPrimitive`1.OnInitialized">
-            <summary>
-            Method invoked when the component is ready to start.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.CreateListFromPrimitive`1.GetAttributes">
-            <summary>
-            Method used for get attributes.
-            </summary>
-            <returns>return attributes for ul element.</returns>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.PrimitiveListItem`1">
-            <summary>
-            Component to create list from primitive data for executing primitive list items common functionalities.
-            </summary>
-            <typeparam name="TValue">The generic type parameter.</typeparam>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.PrimitiveListItem`1.OnInitialized">
-            <summary>
-            Method invoked when the component is ready to start.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.PrimitiveListItem`1.OnAfterRenderAsync(System.Boolean)">
-            <summary>
-            Method invoked after each time the component has been rendered.
-            </summary>
-            <param name="firstRender">Set to true for the first time component rendering; otherwise gets false.</param>
-            <returns>Task.</returns>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.SfListBase`1">
-            <exclude/>
-            <summary>
-            A list base component for all the Syncfusion Blazor List dependant components to implement the common functionalities.
-            </summary>
-            /// <typeparam name="TValue">The generic type parameter.</typeparam>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.Internal.SfListBase`1.itemCreating">
-            <summary>
-            ItemCreating event of the listbase which triggers before creating every item of the list.
-            </summary>
-        </member>
-        <member name="F:Syncfusion.Blazor.Lists.Internal.SfListBase`1.itemCreated">
-            <summary>
-            ItemCreating event of the listbase which triggers after every item of the list created.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.SfListBase`1.ChildContent">
-            <exclude/>
-            <summary>
-            Update child content from parent component.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.SfListBase`1.OnInitialized">
-            <summary>
-            Method invoked when the component is ready to start.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.DefaultListBaseOptions`1">
-            <exclude/>
-            <summary>
-            List base default component model classes.
-            </summary>
-            <typeparam name="T">The generic type parameter.</typeparam>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.DefaultListBaseOptions`1.GetDefaultFieldsMapping">
-            <summary>
-             maps and returns default listbase fields values to the listbase fields
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.Internal.DefaultListBaseOptions`1.GetModuleClassList(System.String)">
-            <summary>
-            sets and returns default classlist for listbase.
-            </summary>
-            <param name="moduleName">Specifies the module name.</param>
-            <returns>returns the module class list.</returns>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CheckedItemDetails.ElementId">
-            <summary>
-            It is used to denote checked Element id details.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.CheckedItemDetails.Key">
-            <summary>
-            It is used to denote the datasource key.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.Internal.ListElementDetails`1">
-            <exclude/>
-            <summary>
-            Referring given li element data details.
-            </summary>
-            <typeparam name="T">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListElementDetails`1.Child">
-            <summary>
-            Denotes the nested child data of the list item.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListElementDetails`1.Id">
-            <summary>
-            Denotes the id of the item element.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListElementDetails`1.ItemData">
-            <summary>
-            Denotes the data of the list item.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListElementDetails`1.ItemText">
-            <summary>
-            Denotes the list item text.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.Internal.ListElementDetails`1.Index">
-            <summary>
-            Denotes index of the list element.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.SfListView`1">
-            <summary>
-            Component for executing complex list items common functionalities.
-            </summary>
-            <typeparam name="TValue">The generic type parameter.</typeparam>
-            <summary>
-            Configure member properties of the ListView component.
-            </summary>
-            <summary>
-            The SfListView control represents the data in interactive hierarchical structure interface across different layouts or views,
-            that also has features such as data-binding, template, grouping and virtualization.
-            </summary>
-            <summary>
-            The SfListView control represents the data in interactive hierarchical structure interface across different layouts or views,
-            that also has features such as data-binding, template, grouping and virtualization.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.OnInitialized">
-            <summary>
-            Method invoked when the component is ready to start.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.OnParametersSetAsync">
-            <summary>
-            Method invoked when any changes in component state occurs.
-            </summary>
-            <returns>Task.</returns>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.OnAfterRenderAsync(System.Boolean)">
-            <summary>
-            Method invoked after each time the component has been rendered.
-            </summary>
-            <param name="firstRender">Set to true for the first time component rendering; otherwise gets false.</param>
-            <returns>Task.</returns>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.ID">
-            <summary>
-            The `ID` property is used as a key to identify our element.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.ChildContent">
-            <exclude/>
-            <summary>
-            Update child content from parent component.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.Animation">
-            <summary>
-            The `Animation` property provides an option to apply different
-             animations to the ListView component.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.CheckBoxPosition">
-            <summary>
-            The `CheckBoxPosition` is used to set the position of the check box in a list item.
-            By default, the `checkBoxPosition` is Left, which will appear before the text content in a list item.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.CssClass">
-            <summary>
-            The `CssClass` property is used to add a user-preferred class name in the root element of the ListView,
-             using which you can customize the component (both CSS and functionality customization).
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.DataSource">
-            <summary>
-            The `DataSource` provides the data to render the ListView component which is mapped with the fields of ListView.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.ListDataSource">
-            <summary>
-            This dataSource property is used for internal functionalities.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.CheckedItems">
-            <summary>
-            The `CheckedItems` property is used to set the item that need to be checked or
-            get the details of items that are currently checked in the ListView component.
-            The `CheckedItems` property depends upon the value of `showCheckBox` property.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.Enabled">
-            <summary>
-            If `Enabled` is set to true, the list items will be enabled. 
-            You can disable the component using this property by setting its value as false.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.EnablePersistence">
-            <summary>
-            Enable or disable persisting component's state between page reloads.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.EnableRtl">
-            <summary>
-            Enable or disable rendering component in right to left direction.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.EnableVirtualization">
-            <summary>
-            If `EnableVirtualization` is set to true, the ListView’s performance will improve when loading a large amount of data.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.ListFields">
-            <summary>
-            The `Fields` is used to map keys from the dataSource which extracts the appropriate data from the dataSource
-             with specified mapped with the column fields to render the ListView.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.HeaderTitle">
-            <summary>
-            The `HeaderTitle` is used to set the title of the ListView component.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.Height">
-            <summary>
-            Defines the height of the ListView component.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.HtmlAttributes">
-            <summary>
-            The `HtmlAttributes` allows additional attributes such as id, class, etc., and
-             accepts n number of attributes in a key-value pair format.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.Query">
-            <summary>
-            The `Query` is used to fetch specific data from the data source by using the where and select keywords.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.ShowCheckBox">
-            <summary>
-            If `ShowCheckBox` is set to true, the checkbox will  be shown or hidden.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.ShowHeader">
-            <summary>
-            If `ShowHeader` is set to true, the header of the ListView component will  be shown or hidden.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.ShowIcon">
-            <summary>
-            If `ShowIcon` is set to true, the icon of the list item will  be shown or hidden.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.SortOrder">
-            <summary>
-            The `SortOrder` is used to sort the data source. The available type of sort orders are,
-             `None` - The data source will not be sorted.
-             `Ascending` - The data source will be sorted in ascending order.
-             `Descending` - The data source will be sorted in descending order.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.Width">
-            <summary>
-            Defines the width of the ListView component.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.GroupTemplate">
-            <summary>
-            The ListView has an option to custom design the group header title with the help of the groupTemplate property.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.HeaderTemplate">
-            <summary>
-            The ListView has an option to custom design the ListView header title with the help of the headerTemplate property.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.Template">
-            <summary>
-            The ListView supports customizing the content of each list item with the help of template property.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.DisableItem(`0)">
-            <summary>
-            Disables the list items by passing the Id and text fields.
-            listItem like fields: TValue { fieldName: fieldValue }.
-            </summary>
-            <param name="listItem">Specifies the list item arguement.</param>
-            <returns>Task.</returns>
-            <exclude/>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.DisableItemAsync(`0)">
-            <summary>
-            Disables the list items by passing the Id and text fields.
-            listItem like fields: TValue { fieldName: fieldValue }.
-            </summary>
-            <param name="listItem">Specifies the list item arguement.</param>
-            <returns>Task.</returns>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.EnableItem(`0)">
-            <summary>
-            Enables the disabled list items by passing the Id and text fields.
-            listItem like fields: TValue { fieldName: fieldValue }.
-            </summary>
-            <param name="listItem">Specifies the list item arguement.</param>
-            <returns>Task.</returns>
-            <exclude/>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.EnableItemAsync(`0)">
-            <summary>
-            Enables the disabled list items by passing the Id and text fields.
-            listItem like fields: TValue { fieldName: fieldValue }.
-            </summary>
-            <param name="listItem">Specifies the list item arguement.</param>
-            <returns>Task.</returns>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.GetSelectedItem">
-            <summary>
-            Gets the details of the currently selected item from the list items.
-            </summary>
-            <returns>Task.</returns>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.GetCheckedItems">
-            <summary>
-            Gets the details of the currently checked item from the list items.
-            </summary>
-            <returns>Task.</returns>
-            <exclude/>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.GetCheckedItemsAsync">
-            <summary>
-            Gets the details of the currently checked item from the list items.
-            </summary>
-            <returns>Task.</returns>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.Remove(`0)">
-            <exclude/>
-            <summary>
-            Remove Element from datasource based on given item details
-            element like fields: TValue { fieldName: fieldValue }.
-            </summary>
-            <param name="listItem">Specifies the list item arguement.</param>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.RemoveItems(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Removes item(s) from the ListView by passing the array of field objects.
-            listItems like fields: TValue { fieldName: fieldValue }.
-            </summary>
-            <param name="listItems">Specifies the list items arguement.</param>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.CheckItems(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Check the items in ListView
-            To check the specific listItem by passing the fields like : TValue { fieldName: fieldValue }
-            To check all the listItem by passing empty argument.
-            </summary>
-            <param name="listItems">Specifies the list items arguement.</param>
-            <returns>Task.</returns>
-            <exclude/>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.CheckItemsAsync(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Check the items in ListView
-            To check the specific listItem by passing the fields like : TValue { fieldName: fieldValue }
-            To check all the listItem by passing empty argument.
-            </summary>
-            <param name="listItems">Specifies the list items arguement.</param>
-            <returns>Task.</returns>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.UncheckItems(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Uncheck the items in ListView.
-            To uncheck the specific listItem by passing the fields like : TValue { fieldName: fieldValue }.
-            To uncheck all the listItem by passing empty argument.
-            </summary>
-            <param name="listItems">Specifies the list item arguement.</param>
-            <returns>Task.</returns>
-            <exclude/>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.UncheckItemsAsync(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Uncheck the items in ListView.
-            To uncheck the specific listItem by passing the fields like : TValue { fieldName: fieldValue }.
-            To uncheck all the listItem by passing empty argument.
-            </summary>
-            <param name="listItems">Specifies the list item arguement.</param>
-            <returns>Task.</returns>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.DataManager">
-            <exclude/>
-            <summary>
-            Creating instance of object of DataManager.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.ElementRef">
-            <summary>
-            Creating the element reference.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.SfListView`1.PersistenceValues">
-            <summary>
-            Referring the Persistence values.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.PersistenceValues.AllCheckedItems">
-            <summary>
-            The `AllCheckedItems` property is used to set the list that need to be checked.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.PersistenceValues.CssClass">
-            <summary>
-            The `CssClass` property is used to add a user-preferred class name in the root element of the ListView,
-             using which we can customize the component (both CSS and functionality customization).
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.PersistenceValues.EnableRtl">
-            <summary>
-            Enable or disable rendering component in right to left direction.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.PersistenceValues.Enable">
-            <summary>
-            If `Enabled` set to true, the list items are enabled.
-            And, we can disable the component using this property by setting its value as false.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SfListView`1.PersistenceValues.SortOrder">
-            <summary>
-            The `SortOrder` is used to sort the data source. The available type of sort orders are,
-             `None` - The data source is not sorting.
-             `Ascending` - The data source is sorting with ascending order.
-             `Descending` - The data source is sorting with descending order.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.TriggerActionComplete(System.Collections.Generic.IEnumerable{`0})">
-            <exclude/>
-            <summary>
-            trigger action complete event.
-            </summary>
-            <returns>Task.</returns>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.ListChildDataSource(Syncfusion.Blazor.Lists.Internal.ListElementReference)">
-            <exclude/>
-            <summary>
-            Rendering Nested List.
-            </summary>
-            <param name="reference"> specifies the reference parameter.</param>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.UpdateLiElementHeight(System.Double)">
-            <exclude/>
-            <summary>
-            Update Li element height.
-            </summary>
-            <param name="height"> specifies the reference parameter.</param>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.VirtualScrolling(System.Int32)">
-            <exclude/>
-            <summary>
-            Update Li element based on scrolling Difference.
-            </summary>
-            <param name="listDifference"> specifies the list difference.</param>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.GetComponenetHeight(System.Double)">
-            <exclude/>
-            <summary>
-            Rendering the LI element based on window height in virtual scrolling.
-            </summary>
-            <param name="componentHeight"> specifies the component height.</param>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.UpdateData(System.Boolean,System.String)">
-            <exclude/>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.RecursiveUpdateData(System.Collections.Generic.List{`0},System.Boolean,System.String)">
-            <summary>
-             Specifies the method RecursiveUpdateData
-            </summary>
-            <param name="newDataSource"></param>
-            <param name="isChecked"></param>
-            <param name="id"></param>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.TriggerBackEvent(Syncfusion.Blazor.Lists.Internal.ListElementReference)">
-            <exclude/>
-            <summary>
-            Back event handler invoke method.
-            </summary>
-            <param name="args"> specifies the list element arguements.</param>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.TriggerClickEvent(Syncfusion.Blazor.Lists.Internal.ListElementReference)">
-            <exclude/>
-            <summary>
-            Click event handler invoke method.
-            </summary>
-            <param name="args"> specifies the list element arguements.</param>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.GetPropertyValue(`0,System.String)">
-            <summary>
-            get fields property values from TValue tye data source.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.UpdateTemplate(System.String,System.Object)">
-            <summary>
-            Update the template values.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.GetPropertyStyle">
-            <summary>
-            Get style Attributes value.
-            </summary>
-            <returns> returns property styles.</returns>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.UpdateStyle(System.String,System.String)">
-            <summary>
-            Get style Attributes value.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.SerializeModel(Syncfusion.Blazor.Lists.SfListView{`0})">
-            <summary>
-            Updating the persisting values to our component properties.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.GetProperties">
-            <summary>
-            Get Public property information.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.UpdateVirtualIndex">
-            <summary>
-            Updates the virtual index value.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.UpdateListViewDataSource(System.Boolean,System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Updates listview datasource.
-            </summary>
-            <param name="updateSortedData"> specifies the update sorted data.</param>
-            <param name="dataSource"> specifies the data source.</param>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.UpdateAfterRenderDataSource">
-            <summary>
-            Updating DataSource After rendering the component.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.DyanamicPropertyUpdate">
-            <summary>
-            Updates the virtual index value.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.PersistProperties(Syncfusion.Blazor.Lists.SfListView{`0}.PersistenceValues)">
-            <summary>
-            Defines the properties of persisting component's state between page reloads.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.SetLocalStorage(System.String,System.String)">
-            <summary>
-            Update the Persistence value to local storage.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.GetSortedData(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Get the sorted data.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.SfListView`1.GetLiElementData(Syncfusion.Blazor.Lists.Internal.ListElementReference,System.Boolean)">
-            <summary>
-            Returns list element related data based on given elementId and datasource key.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.ListViewEvents`1">
-            <summary>
-            Configure handlers to handle the events with the ListView component.
-            </summary>
-            <typeparam name="TValue">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewEvents`1.BaseParent">
-            <summary>
-            Specifies the base parent.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewEvents`1.OnActionBegin">
-            <summary>
-            Triggers when each ListView action begins.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewEvents`1.OnActionComplete">
-            <summary>
-            Triggers when each ListView action is completed.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewEvents`1.OnActionFailure">
-            <summary>
-            Triggers when the data fetch request from the remote server fails.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewEvents`1.Clicked">
-            <summary>
-            Triggers when a list item in the component is clicked.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewEvents`1.OnBack">
-            <summary>
-            Triggers when the back icon is clicked in the nested list item.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewEvents`1.Created">
-            <summary>
-            Triggers when the component is created.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewEvents`1.Destroyed">
-            <summary>
-            Triggers when the component is destroyed.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.ListViewEvents`1.OnInitializedAsync">
-            <summary>
-            Method invoked when the component is ready to start.
-            </summary>
-            <returns>Task.</returns>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.ListViewFieldSettings`1">
-            <summary>
-            Configure handlers to handle the field settings with the ListView component.
-            </summary>
-            <typeparam name="TValue">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewFieldSettings`1.Child">
-            <summary>
-            The `Child` property is used for nested navigation of listed items.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewFieldSettings`1.Enabled">
-            <summary>
-            Specifies the enabled state of the ListView component.
-            You can disable the component using this property by setting its value as false.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewFieldSettings`1.GroupBy">
-            <summary>
-            The `GroupBy` property is used to wraps the ListView elements into a group based on the field value.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewFieldSettings`1.HtmlAttributes">
-            <summary>
-            The `HtmlAttributes` allows additional attributes such as id, class, etc., and
-             accepts n number of attributes in a key-value pair format.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewFieldSettings`1.IconCss">
-            <summary>
-            The `IconCss` is used to customize the icon fo the list items dynamically.
-             You can add a specific image to the icons using the `iconCss` property.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewFieldSettings`1.Id">
-            <summary>
-            Specifies the id field mapped in data source.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewFieldSettings`1.IsChecked">
-            <summary>
-            The `IsChecked` property is used to check whether the list items are in a checked state or not.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewFieldSettings`1.ListIsVisible">
-            <summary>
-            The `IsVisible` property is used to check whether the list items are in visible state or not.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewFieldSettings`1.Text">
-            <summary>
-            The `Text` property is used to map the text value from the data source for each list item.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewFieldSettings`1.Tooltip">
-            <summary>
-            The `Tooltip` is used to display the information about the target element while hovering on list items.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.ListViewFieldSettings`1.OnInitializedAsync">
-            <summary>
-            Method invoked when the component is ready to start.
-            </summary>
-            <returns>Task.</returns>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.ListViewTemplates`1">
-            <summary>
-            Configure templates of the ListView component.
-            </summary>
-            <typeparam name="TValue">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewTemplates`1.Template">
-            <summary>
-            The ListView component supports to customize the content of each list items with the help of Template property.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewTemplates`1.GroupTemplate">
-            <summary>
-            Accepts the template design and assigns it to the group headers present in the ListView.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ListViewTemplates`1.HeaderTemplate">
-            <summary>
-            The ListView has an option to custom design the ListView header title with the help of HeaderTemplate property.
-            </summary>
-        </member>
-        <member name="M:Syncfusion.Blazor.Lists.ListViewTemplates`1.OnInitialized">
-            <summary>
-            Method invoked when the component is ready to start.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.ClickEventArgs`1">
-            <summary>
-            The class that holds click event arguments.
-            </summary>
-            <typeparam name="T">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ClickEventArgs`1.ItemData">
-            <summary>
-            It denotes the clicked item dataSource JSON object.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ClickEventArgs`1.Name">
-            <summary>
-            It denotes the event name.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ClickEventArgs`1.IsChecked">
-            <summary>
-            It is used to check whether the element is checked or not.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ClickEventArgs`1.Index">
-            <summary>
-            It denotes the index position of cliked element.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ClickEventArgs`1.IsInteracted">
-            <summary>
-            Specifies that event has triggered by user interaction.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ClickEventArgs`1.Text">
-            <summary>
-            It denotes the selected item text.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ClickEventArgs`1.Cancel">
-            <summary>
-            It denotes the cancel argument.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ClickEventArgs`1.Level">
-            <summary>
-            It denotes the level of the nested list items.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.BackEventArgs`1">
-            <summary>
-            The class that holds back event arguments.
-            </summary>
-            <typeparam name="T">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.BackEventArgs`1.IsInteracted">
-            <summary>
-            Specifies that event has triggered by user interaction.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.BackEventArgs`1.Level">
-            <summary>
-            It denotes the level of the nested list items.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.ActionEventsArgs">
-            <summary>
-            The class that holds action event arguments.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ActionEventsArgs.Count">
-            <summary>
-            Return the total number of records.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ActionEventsArgs.Name">
-            <summary>
-            Specify the Event Name.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.ActionFailureEventsArgs">
-            <summary>
-            The class that holds action failure event arguments.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ActionFailureEventsArgs.Error">
-            <summary>
-            It denotes exception error.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.AnimationSettings">
-            <summary>
-            An interface that holds animation settings.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.AnimationSettings.Duration">
-            <summary>
-            It is used to specify the time duration of transform object.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.AnimationSettings.Easing">
-            <summary>
-            It is used to specify the easing effect applied while transform.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.AnimationSettings.Effect">
-            <summary>
-            It is used to specify the effect which is shown in sub list transform.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.SelectedItems`1">
-            <summary>
-            An interface that holds list selected item.
-            </summary>
-            <typeparam name="T">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SelectedItems`1.Data">
-            <summary>
-            Specifies the selected item dataSource collection.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SelectedItems`1.Index">
-            <summary>
-            Specifies index of the selected element.
-            Available only in virtualization.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SelectedItems`1.ParentId">
-            <summary>
-            Specifies the hierarchical parent id collection of the current view.
-            Available only in nested list with checkbox enabled.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.SelectedItems`1.Text">
-            <summary>
-            Specifies the selected item text collection.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.AriaAttributesMapping">
-            <summary>
-            An class that holds item aria attributes mapping.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.AriaAttributesMapping.GroupItemRole">
-            <summary>
-            Specifies the item aria attributes mapping for GroupItemRole.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.AriaAttributesMapping.ItemRole">
-            <summary>
-            Specifies the item aria attributes mapping for ItemRole.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.AriaAttributesMapping.ItemText">
-            <summary>
-            Specifies the item aria attributes mapping for ItemText.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.AriaAttributesMapping.Level">
-            <summary>
-            Specifies the item aria attributes mapping for Level.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.AriaAttributesMapping.ListRole">
-            <summary>
-            Specifies the item aria attributes mapping for ListRole.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.AriaAttributesMapping.WrapperRole">
-            <summary>
-            Specifies the item aria attributes mapping for WrapperRole.
-            </summary>
-        </member>
-        <member name="T:Syncfusion.Blazor.Lists.ComposedItemModel`1">
-            <summary>
-            common class model for grouped list.
-            </summary>
-            <exclude/>
-            <typeparam name="T">The generic type parameter.</typeparam>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ComposedItemModel`1.IsGroupItem">
-            <summary>
-            It used to check the list item is grouped item or not.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ComposedItemModel`1.Data">
-            <summary>
-            It used to specify the data.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ComposedItemModel`1.Key">
-            <summary>
-            It used to specify the key.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ComposedItemModel`1.IsHeader">
-            <summary>
-            It used to check the group item is header.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ComposedItemModel`1.Id">
-            <summary>
-            It used to specify the id.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ComposedItemModel`1.Text">
-            <summary>
-            It used to specify the text.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Lists.ComposedItemModel`1.Items">
-            <summary>
-            It used to specify the items.
-            </summary>
-        </member>
         <member name="T:Syncfusion.Blazor.Navigations.AccordionAnimationCollapse">
             <summary>
             Specifies the animation to appear while collapsing the Accordion item.
@@ -37145,11 +36083,6 @@
             Specifies the child attribute.
             </summary>
         </member>
-        <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsMapping.Enabled">
-            <summary>
-            Specifies the Enabled field attribute.
-            </summary>
-        </member>
         <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsMapping.Expanded">
             <summary>
             Specifies the Expanded field attribute.
@@ -37173,11 +36106,6 @@
         <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsMapping.Id">
             <summary>
             Specifies the Id field attribute.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsMapping.ImageAttributes">
-            <summary>
-            Specifies the ImageAttribute.
             </summary>
         </member>
         <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsMapping.ImageUrl">
@@ -37210,16 +36138,6 @@
             Specifies the Url field attribute.
             </summary>
         </member>
-        <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsMapping.UrlAttributes">
-            <summary>
-            Specifies the UrlAttributes field attribute.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsMapping.Value">
-            <summary>
-            Specifies the value field attribute.
-            </summary>
-        </member>
         <member name="T:Syncfusion.Blazor.Navigations.Internal.FieldsValueMapping`1">
             <summary>
             Specifies the field values Mapping.
@@ -37230,11 +36148,6 @@
         <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsValueMapping`1.Child">
             <summary>
             Specifies the child field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsValueMapping`1.Enabled">
-            <summary>
-            Specifies the Enabled field.
             </summary>
         </member>
         <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsValueMapping`1.Expanded">
@@ -37290,21 +36203,6 @@
         <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsValueMapping`1.HtmlAttributes">
             <summary>
             Specifies the HtmlAttriibutes field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsValueMapping`1.ImageAttributes">
-            <summary>
-            Specifies the child field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsValueMapping`1.UrlAttributes">
-            <summary>
-            Specifies the UrlAttributes field.
-            </summary>
-        </member>
-        <member name="P:Syncfusion.Blazor.Navigations.Internal.FieldsValueMapping`1.Value">
-            <summary>
-            Specifies the Value field.
             </summary>
         </member>
         <member name="T:Syncfusion.Blazor.Navigations.Internal.ItemCreatedArgs`1">

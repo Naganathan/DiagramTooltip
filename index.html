@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>BlazorWebApp</title>
+    <title>BlazorWASMLocalization</title>
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
-    <link href="BlazorWebApp.styles.css" rel="stylesheet" />
+    <link href="BlazorWASMLocalization.styles.css" rel="stylesheet" />
     <link href="_content/Syncfusion.Blazor/styles/bootstrap4.css" rel="stylesheet" />
 </head>
 
@@ -20,6 +20,12 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        window.cultureInfo = {
+            get: () => window.localStorage['BlazorCulture'],
+            set: (value) => window.localStorage['BlazorCulture'] = value
+        };
+    </script>
 </body>
 
 </html>
